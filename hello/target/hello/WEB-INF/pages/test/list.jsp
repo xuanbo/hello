@@ -12,9 +12,7 @@
     <title>测试页面</title>
 </head>
 <body>
-  <div style="text-align: center;font-size: 200%;">
-    ${title}
-  </div>
+
   <div style="text-align: center;">
     <c:if test="${not empty users}">
       <c:forEach items="${users}" var="e">
@@ -22,5 +20,6 @@
       </c:forEach>
     </c:if>
   </div>
+
 </body>
 </html>

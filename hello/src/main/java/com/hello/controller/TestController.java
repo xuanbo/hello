@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 /**
  * Created by xuan on 2015/12/26.
  */
@@ -19,10 +20,15 @@ public class TestController {
     @Qualifier("userService")
     private UserServicer userServicer;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(ModelMap modelMap){
-        modelMap.addAttribute("title", "测试用户列表");
+
+    /**
+     *娴嬭瘯freeMarker
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "/listByFreemarker", method = RequestMethod.GET)
+    public String listByFreemarker(ModelMap modelMap){
         modelMap.addAttribute("users", userServicer.getAll());
-        return "test/list";
+        return "test/userList";
     }
 }
