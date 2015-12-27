@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -22,13 +23,17 @@ public class TestController {
 
 
     /**
-     *测试freeMarker
+     * 测试freeMarker
      * @param modelMap
      * @return
      */
     @RequestMapping(value = "/listByFreemarker", method = RequestMethod.GET)
-    public String listByFreemarker(ModelMap modelMap){
-        modelMap.addAttribute("users", userServicer.getAll());
+    public String listByFreemarker(@RequestParam(required = false, defaultValue = "1") int current,
+            @RequestParam(required = false, defaultValue = "10") int size,
+                                   ModelMap modelMap){
+        modelMap.addAttribute("message","用户列表测试");
+        modelMap.addAttribute("users", userServicer.getByPage(current, size));
         return "test/userList";
     }
+    
 }

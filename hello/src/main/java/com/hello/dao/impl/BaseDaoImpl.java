@@ -112,7 +112,7 @@ public class BaseDaoImpl <T, ID extends Serializable> implements BaseDao <T, ID>
     }
 
     public Page<T> getByPage(int current, int size) {
-        String hql = "from " + entityClass;
+        String hql = "from " + entityClass.getName();
         Query query = this.getHibernateSession().createQuery(hql);
         query.setFirstResult((current - 1) * size);
         query.setMaxResults(size);

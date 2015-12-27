@@ -13,6 +13,9 @@
 
     <mvc:annotation-driven />
 
+    <!-- 静态资源访问 -->
+    <mvc:resources mapping="/assets/**" location="WEB-INF/assets/"/>
+
     <!-- 配置spring mvc视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
@@ -28,7 +31,7 @@
         <!-- freeMarker配置 -->
         <property name="freemarkerSettings">
             <props>
-                <prop key="template_update_delay">3600</prop>
+                <prop key="template_update_delay">0</prop>
                 <prop key="tag_syntax">auto_detect</prop>
                 <prop key="defaultEncoding">UTF-8</prop>
                 <prop key="url_escaping_charset">UTF-8</prop>
@@ -60,5 +63,7 @@
         <property name="exposeSpringMacroHelpers" value="true"/>
         <property name="order" value="0" />
     </bean>
+
+
 
 </beans>
