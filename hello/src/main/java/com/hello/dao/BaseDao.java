@@ -12,64 +12,64 @@ import java.util.List;
 public interface BaseDao <T, ID extends Serializable> {
 
     /**
-     * ´æ´¢¶ÔÏó
+     * ä¿å­˜å®ä½“
      * @param object
      */
     public void save(Object object);
 
     /**
-     * ¸ù¾İid»ñÈ¡¶ÔÏó
+     * æ ¹æ®idè·å–å®ä½“
      * @param id
      * @return
      */
     public T get(ID id);
 
     /**
-     * ¸ù¾İname»ñÈ¡Êı¾İ¼ÇÂ¼
+     * æ ¹æ®nameå±æ€§è·å–è®°å½•é›†åˆ
      * @param name
      * @return
      */
     public List<T> getByName(String name);
 
     /**
-     * ¸üĞÂ¼ÇÂ¼
+     * æ›´æ–°è®°å½•
      * @param object
      */
     public void updata(Object object);
 
     /**
-     * ¸ù¾İidÉ¾³ı¼ÇÂ¼
+     * æ ¹æ®idåˆ é™¤è®°å½•
      * @param id
      */
     public void delete(ID id);
 
     /**
-     * ¸ù¾İ¶ÔÏóÉ¾³ı¼ÇÂ¼
+     * æ ¹æ®å®ä½“åˆ é™¤è®°å½•
      * @param object
      */
     public void delete(Object object);
 
     /**
-     * »ñÈ¡ËùÓĞ¼ÇÂ¼
+     * è·å–æ‰€æœ‰çš„è®°å½•é›†
      * @return
      */
     public List<T> getAll();
 
     /**
-     * »ñÈ¡×ÜµÄ¼ÇÂ¼Êı
+     * è·å–è®°å½•æ•°ç›®
      * @return
      */
     public Long getCount();
 
     /**
-     * ¸ù¾İhqlÓï¾ä²éÑ¯¼ÇÂ¼ÌõÊı
+     * æ ¹æ®hqlè·å–è®°å½•æ•°ç›®
      * @param hql
      * @return
      */
     public Long getCount(String hql);
 
     /**
-     * ¸ù¾İhqlÓï¾äºÍ²ÎÊı»ñÈ¡¼ÇÂ¼ÌõÊı
+     * æ ¹æ®hqlå’Œå±æ€§è·å–æ•°ç›®
      * @param hql
      * @param params
      * @return
@@ -77,14 +77,14 @@ public interface BaseDao <T, ID extends Serializable> {
     public Long getCount(String hql, Object... params);
 
     /**
-     * ¸ù¾İhqlÓï¾ä»ñÈ¡¼ÇÂ¼
+     * æ ¹æ®hqlè·å–è®°å½•é›†
      * @param hql
      * @return
      */
     public List<T> getByHql(String hql);
 
     /**
-     * ¸ù¾İhqlÓï¾ä»ñÈ¡¼ÇÂ¼
+     * æ ¹æ®hqlå’Œå‚æ•°è·å–è®°å½•é›†
      * @param hql
      * @param params
      * @return
@@ -92,7 +92,7 @@ public interface BaseDao <T, ID extends Serializable> {
     public List<T> getByHql(String hql, Object... params);
 
     /**
-     * ·ÖÒ³»ñÈ¡¼ÇÂ¼
+     * åˆ†é¡µè·å–è®°å½•
      * @param current
      * @param size
      * @return
@@ -100,7 +100,7 @@ public interface BaseDao <T, ID extends Serializable> {
     public Page<T> getByPage(int current, int size);
 
     /**
-     * ¸ù¾İhqlÓï¾ä·ÖÒ³»ñÈ¡¼ÇÂ¼
+     * æ ¹æ®hqlåˆ†é¡µè·å–è®°å½•
      * @param hql
      * @param current
      * @param size
@@ -109,7 +109,7 @@ public interface BaseDao <T, ID extends Serializable> {
     public Page<T> getByPage(String hql, int current, int size);
 
     /**
-     * ¸ù¾İhqlÓï¾ä·ÖÒ³»ñÈ¡¼ÇÂ¼
+     * æ ¹æ®hqlå’Œå‚æ•°åˆ†é¡µè·å–è®°å½•
      * @param hql
      * @param current
      * @param size
@@ -119,19 +119,19 @@ public interface BaseDao <T, ID extends Serializable> {
     public Page<T> getByPage(String hql, int current, int size, Object... params);
 
     /**
-     * ÅúÁ¿´æ´¢¼ÇÂ¼
+     * æ‰¹é‡ä¿å­˜
      * @param collection
      */
     public void batchSave(Collection<T> collection);
 
     /**
-     * ÅúÁ¿¸üĞÂ¼ÇÂ¼
+     * æ‰¹é‡æ›´æ–°
      * @param collection
      */
     public void batchUpdate(Collection<T> collection);
 
     /**
-     * ¸ù¾İid¼¯É¾³ıÅúÁ¿É¾³ı¼ÇÂ¼
+     * æ ¹æ®idé›†æ‰¹é‡åˆ é™¤è®°å½•
      * @param ids
      */
     public void batchDelete(ID[] ids);

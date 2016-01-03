@@ -15,7 +15,7 @@ import java.util.List;
 public class BaseServiceImpl <T, ID extends Serializable> implements BaseService <T, ID>{
 
     @Autowired
-    private BaseDao<T, ID> baseDao;
+    protected BaseDao <T, ID> baseDao;
 
 
     public void save(Object object) {

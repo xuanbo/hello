@@ -2,25 +2,31 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="com.hello"/>
-
+    <context:annotation-config/>
     <mvc:annotation-driven />
+
+    <!-- aop切面注解生效 如果写在beans.xml里可能会不起作用 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- 静态资源访问 -->
     <mvc:resources mapping="/assets/**" location="WEB-INF/assets/"/>
 
     <!-- 配置spring mvc视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="prefix" value="/WEB-INF/pages/jsp/"/>
         <property name="suffix" value=".jsp"/>
-        <property name="order" value="1" />
+        <property name="order" value="0" />
     </bean>
 
 
@@ -61,9 +67,44 @@
         <property name="exposeSessionAttributes" value="true"/>
         <!-- 使用这些宏，必须设置FreeMarkerViewResolver的exposeMacroHelpers属性为true -->
         <property name="exposeSpringMacroHelpers" value="true"/>
-        <property name="order" value="0" />
+        <property name="order" value="1" />
     </bean>
 
 
+    <!-- spring mvc 返回json配置 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html; charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- spring mvc文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="maxUploadSize" value="10485760000"></property>
+        <property name="maxInMemorySize" value="40960"></property>
+    </bean>
+
+
+    <!-- 全局异常处理 -->
+    <bean id="exceptionResolver" class="com.hello.exception.MyHandlerExceptionResolver"/>
 
 </beans>

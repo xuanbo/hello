@@ -1,0 +1,10 @@
+.container{
+    margin-top: 5%;
+    width: 40%;
+}
+
+.container p{
+    text-align: center;
+    font-size: 150%;
+    text-shadow: 2px 2px 2px;
+}

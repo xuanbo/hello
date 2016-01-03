@@ -2,9 +2,11 @@ package com.hello.dao.impl;
 
 import com.hello.dao.BaseDao;
 import com.hello.model.Page;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
