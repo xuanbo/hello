@@ -15,20 +15,19 @@ public class Role {
 
     private String name;
 
-    private Set<User> users;
+    private User user;
     private Set<Resource> resources;
 
     public Role() {
         super();
     }
-    public Role(int id, String name, Set<User> users, Set<Resource> resources) {
-        super();
+
+    public Role(int id, String name, User user, Set<Resource> resources) {
         this.id = id;
         this.name = name;
-        this.users = users;
+        this.user = user;
         this.resources = resources;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,12 +45,12 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "role")
+    public User getUser() {
+        return user;
     }
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
@@ -65,12 +64,13 @@ public class Role {
         this.resources = resources;
     }
 
+
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", users=" + users +
+                ", user=" + user +
                 ", resources=" + resources +
                 '}';
     }

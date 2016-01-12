@@ -1,5 +1,6 @@
 package com.hello.controller;
 
+import com.hello.entity.Role;
 import com.hello.security.CustomUserDetailsService;
 import com.hello.service.UserService;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by xuan on 2015/12/31.
@@ -32,6 +34,7 @@ public class LoginController {
     @Qualifier("customUserDetailsService")
     private CustomUserDetailsService customUserDetailsService;
 
+    
     /**
      * 登录页面
      * @param error
@@ -54,7 +57,7 @@ public class LoginController {
 
 
     /**
-     * 登陆验证
+     * 登录验证
      * @param jsonObject
      * @param session
      * @return
@@ -75,11 +78,14 @@ public class LoginController {
             securityContext.setAuthentication(authentication);
             session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
 
+
+            String roleName = userService.getByName(name).get(0).getRole().getName();
+            session.setAttribute("ROLE", roleName);
+
             map.put("flag", "true");
-            map.put("msg", "登录成功");
+            map.put("role", roleName);
         }else{
             map.put("flag", "false");
-            map.put("msg", "用户名不存在或密码错误");
         }
         return map;
     }

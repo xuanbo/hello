@@ -19,6 +19,13 @@
 <body>
     <div class="container">
         <p>LOGIN</p>
+
+        <c:if test="${not empty msg}">
+            <div class="alert alert-danger" role="alert">
+                ${msg}
+            </div>
+        </c:if>
+
         <br>
         <div class="form-group">
             <div class="input-group">

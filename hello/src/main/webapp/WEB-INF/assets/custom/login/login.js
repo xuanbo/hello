@@ -1,4 +1,4 @@
-(function($){
+;(function($){
     $(function(){
 
         $('#signIn').on('click', function () {
@@ -21,11 +21,17 @@
                     data: data,
                     success: function(result){
                         if (result.flag == 'true'){
-                            window.location.assign('/');
+                            if (result.role == "admin"){
+                                window.location.assign('/admin/index');
+                            }else{
+                                window.location.assign('/');
+                            }
+                        }else{
+                            window.location.assign('/login?error');
                         }
                     }
                 });
             }
         })
     });
-})(jQuery)
+})(jQuery);

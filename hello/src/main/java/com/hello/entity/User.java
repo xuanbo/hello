@@ -1,7 +1,6 @@
 package com.hello.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by xuan on 2015/12/26.
@@ -15,16 +14,15 @@ public class User {
     private String name;
     private String password;
 
-    private Set<Role> roles;
+    private Role role;
 
     public User() {
     }
-
-    public User(Integer id, String name, String password, Set<Role> roles) {
+    public User(Integer id, String name, String password, Role role) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
     @Id
@@ -50,18 +48,16 @@ public class User {
         this.password = password;
     }
 
-
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinTable(name = "userRole" ,
             joinColumns = { @JoinColumn( name ="userId" )},
             inverseJoinColumns = { @JoinColumn( name = "roleId") })
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
-
 
     @Override
     public String toString() {
@@ -69,7 +65,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
+                ", role=" + role +
                 '}';
     }
 }

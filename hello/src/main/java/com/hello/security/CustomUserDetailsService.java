@@ -49,15 +49,24 @@ public class CustomUserDetailsService implements UserDetailsService {
      */  
 	private Set<GrantedAuthority> getAuthorities(User user) {
   
-		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();  
-        Set<Role> roles = user.getRoles();
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        /**
+         * user-role many-many
+         *
+         Set<Role> roles = user.getRoles();
+         Set<Resource> resources = new HashSet<Resource>();
+         for(Role role : roles){
+         resources = role.getResources();
+         for(Resource resource : resources){
+         authorities .add(new  SimpleGrantedAuthority(resource.getAuthority()));
+         }
+         }
+         */
         Set<Resource> resources = new HashSet<Resource>();
-        for(Role role : roles){
-        	resources = role.getResources();
-        	for(Resource resource : resources){
-        		authorities .add(new  SimpleGrantedAuthority(resource.getAuthority())); 
-        	}     	
-        } 
+        resources = user.getRole().getResources();
+        for(Resource resource : resources) {
+            authorities.add(new SimpleGrantedAuthority(resource.getAuthority()));
+        }
         return authorities ;  
     }  
 }
